@@ -4,6 +4,8 @@ import { fileURLToPath } from 'url';
 import { Worker } from 'bullmq';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { StateGraph, START, END } from "@langchain/langgraph";
+import http from 'http'; // 🚀 Added HTTP module for Health Server
+
 import { 
   EvaluatorState, JD_Summarizer, R1, R2, R3, Final_Decision as Evaluator_Final_Decision
 } from '../langgraph/main.js';
@@ -95,7 +97,7 @@ async function handleRoast(bullJob) {
 
   const imagePart = await fetchImageToGeminiPart(imageUrl);
   
-  // 🚀 Security Upgrade: Fetching key dynamically from environment
+  // Security Upgrade: Fetching key dynamically from environment
   const genAI = new GoogleGenerativeAI(process.env.GEMINI_ROAST_API_KEY);
   const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-lite" });
   
@@ -221,6 +223,16 @@ worker.on('failed', async (bullJob, err) => {
       result: { error: err.message }
     }
   );
+});
+
+// 🚀 HEALTH CHECK SERVER FOR RENDER
+// Render needs to bind to a port to know the worker is alive.
+const PORT = process.env.PORT || 8080;
+http.createServer((req, res) => {
+  res.writeHead(200, { 'Content-Type': 'application/json' });
+  res.end(JSON.stringify({ status: 'ok', message: 'Graph CV Worker is alive and processing jobs' }));
+}).listen(PORT, () => {
+  console.log(`[Health Check] Server listening on port ${PORT}`);
 });
 
 export default worker;
