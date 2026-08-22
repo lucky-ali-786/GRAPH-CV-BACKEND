@@ -99,7 +99,7 @@ async function handleRoast(bullJob) {
   
   // Security Upgrade: Fetching key dynamically from environment
   const genAI = new GoogleGenerativeAI(process.env.GEMINI_ROAST_API_KEY);
-  const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-lite" });
+  const model = genAI.getGenerativeModel({ model: "gemini-3.5-flash-lite" });
   
   const systemPrompt = "YOU ARE A RESUME ROASTER AI WHO ROASTS THE GIVEN RESUME NO GREETINGS NO SALUTATION NO ACKNOWLEDGEMENTS ONLY ROAST THE GIVEN RESUME IMAGE AND GIVE CLEAN TEXT AS OUTPUT roast it the funny way u can";
   
