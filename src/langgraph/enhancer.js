@@ -17,7 +17,7 @@ async function Experience_Enhancer(state) {
   
   // Securely fetching key from .env
   const genAI = new GoogleGenerativeAI(process.env.GEMINI_EXPERIENCE_API_KEY);
-  const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-lite" });
+  const model = genAI.getGenerativeModel({ model: "gemini-3.5-flash-lite" });
   
   const prompt = `You are an elite Tech Resume Writer. Analyze the Work Experience/Internship sections of the attached resume.
   Suggest specific, rewritten bullet points to maximize ATS scores.
@@ -42,7 +42,7 @@ async function Projects_Enhancer(state) {
   
   // Securely fetching key from .env
   const genAI = new GoogleGenerativeAI(process.env.GEMINI_PROJECTS_API_KEY);
-  const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-lite" });
+  const model = genAI.getGenerativeModel({ model: "gemini-3.5-flash-lite" });
   
   const prompt = `You are a Senior Engineering Manager reviewing a candidate's Personal Projects on the attached resume.
   Suggest specific rewrites to make the projects sound more complex and production-ready for ATS scanners.
@@ -67,7 +67,7 @@ async function Achievements_Enhancer(state) {
   
   // Securely fetching key from .env
   const genAI = new GoogleGenerativeAI(process.env.GEMINI_ACHIEVEMENTS_API_KEY);
-  const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-lite" });
+  const model = genAI.getGenerativeModel({ model: "gemini-3.5-flash-lite" });
   
   const prompt = `You are an ATS Optimization Expert. Analyze the Certifications, Achievements, or Extracurricular sections of the attached resume.
   
@@ -91,7 +91,7 @@ async function Final_Decision(state) {
   
   // Securely fetching key from .env
   const genAI = new GoogleGenerativeAI(process.env.GEMINI_FINAL_API_KEY);
-  const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-lite" });
+  const model = genAI.getGenerativeModel({ model: "gemini-3.5-flash-lite" });
   
   const reports = state.enhancements.join("\n\n--- NEXT ENHANCEMENT REPORT ---\n\n");
   
