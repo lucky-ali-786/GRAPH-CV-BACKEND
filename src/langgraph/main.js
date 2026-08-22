@@ -18,7 +18,7 @@ async function JD_Summarizer(state) {
   
   // Securely fetching key from .env
   const genAI = new GoogleGenerativeAI(process.env.GEMINI_JD_API_KEY);
-  const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-lite" });
+  const model = genAI.getGenerativeModel({ model: "gemini-3.5-flash-lite" });
   
   const prompt = `Summarize this Job Description specifically for an ATS resume checker. 
   Extract core requirements, mandatory skills, and years of experience. 
@@ -33,7 +33,7 @@ async function R1(state) {
   
   // Securely fetching key from .env
   const genAI = new GoogleGenerativeAI(process.env.GEMINI_R1_API_KEY);
-  const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-lite" });
+  const model = genAI.getGenerativeModel({ model: "gemini-3.5-flash-lite" });
   
   const jdSummary = state.results[0] || "No JD provided.";
   const prompt = `Act as a binary ATS Compliance Checker. Your ONLY job is to verify the literal presence of requirements from the Job Description against the attached Resume images. Do not evaluate the quality of the work.
@@ -50,7 +50,7 @@ async function R2(state) {
   
   // Securely fetching key from .env
   const genAI = new GoogleGenerativeAI(process.env.GEMINI_R2_API_KEY);
-  const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-lite" });
+  const model = genAI.getGenerativeModel({ model: "gemini-3.5-flash-lite" });
   
   const jdSummary = state.results[0] || "No JD provided.";
   const prompt = `Act as a Cynical Technical Recruiter. Detect exaggerated claims and "keyword stuffing" in the Resume based on this Job Description:
@@ -67,7 +67,7 @@ async function R3(state) {
   
   // Securely fetching key from .env
   const genAI = new GoogleGenerativeAI(process.env.GEMINI_R3_API_KEY);
-  const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-lite" });
+  const model = genAI.getGenerativeModel({ model: "gemini-3.5-flash-lite" });
   
   const jdSummary = state.results[0] || "No JD provided.";
   const prompt = `Act as a Senior Engineering Manager. Evaluate the technical depth and architectural complexity of the Resume against this Job Description:
@@ -84,7 +84,7 @@ async function Final_Decision(state) {
   
   // Securely fetching key from .env
   const genAI = new GoogleGenerativeAI(process.env.GEMINI_EVAL_FINAL_API_KEY);
-  const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-lite" });
+  const model = genAI.getGenerativeModel({ model: "gemini-3.5-flash-lite" });
   
   const reports = state.results.slice(1).join("\n\n--- NEXT REPORT ---\n\n");
   const prompt = `You are the Head of Talent Acquisition. Review the following 3 sub-evaluations for a candidate:
